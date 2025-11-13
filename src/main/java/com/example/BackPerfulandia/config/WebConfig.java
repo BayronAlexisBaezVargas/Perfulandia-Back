@@ -15,7 +15,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // Aplica a todas las rutas bajo /api/
-                        .allowedOrigins("*")  // Permite peticiones desde cualquier origen (Frontend)
+                        .allowedOrigins("https://perfulandia-frontend-react.vercel.app")  // Permite peticiones desde cualquier origen (Frontend)
                         // .allowedOrigins("http://localhost:3000", "https://tu-dominio-prod.com") // <-- Ejemplo para producción
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
                         .allowedHeaders("*")  // Permite todas las cabeceras (headers)
