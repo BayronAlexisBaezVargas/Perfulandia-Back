@@ -101,7 +101,7 @@ public class Producto {
     public Boolean getActivo() {
         return activo;
     }
-
+//jar
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
