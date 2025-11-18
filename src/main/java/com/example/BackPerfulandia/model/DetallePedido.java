@@ -13,13 +13,13 @@ public class DetallePedido {
     private Long id;
 
     // Relación: Muchos detalles pertenecen a UN pedido
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pedido_id", nullable = false)
-    @JsonIgnore // ¡MUY IMPORTANTE! Evita bucles infinitos al convertir a JSON
+    @JsonIgnore // <--- IMPORTANTE: Rompe el bucle infinito
     private Pedido pedido;
 
     // Relación: Muchos detalles pueden apuntar a UN producto
-    @ManyToOne(fetch = FetchType.EAGER) // <-- CORREGIDO
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 

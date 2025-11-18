@@ -37,7 +37,7 @@ public class Producto {
     public Producto() {
     }
 
-    // Constructor
+    // Constructor para crear nuevos productos (actualizado para incluir activo)
     public Producto(String nombre, Double precio, Integer stock, String descripcion, String imageLink) {
         this.nombre = nombre;
         this.precio = precio;
@@ -47,7 +47,6 @@ public class Producto {
         this.activo = true; // Al crear, nace activo
     }
 
-    // --- Getters y Setters ---
 
     public Long getId() {
         return id;
@@ -101,7 +100,7 @@ public class Producto {
     public Boolean getActivo() {
         return activo;
     }
-//jar
+
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }

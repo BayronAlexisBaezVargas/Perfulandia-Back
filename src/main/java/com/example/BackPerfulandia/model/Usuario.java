@@ -36,7 +36,7 @@ public class Usuario {
 
     // Relación: UN usuario puede tener MUCHOS pedidos
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore // Ignorar al serializar el Usuario para no traer todos sus pedidos
+    @JsonIgnore // <--- IMPORTANTE: Rompe el bucle infinito
     private List<Pedido> pedidos;
 
     // --- Constructores ---
