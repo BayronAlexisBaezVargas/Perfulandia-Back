@@ -14,11 +14,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Usaremos un ID de pedido legible para el cliente, como el #PF-0815
     @Column(name = "numero_pedido", unique = true, nullable = false)
     private String numeroPedido;
 
-    @ManyToOne(fetch = FetchType.EAGER) // <-- CORREGIDO
+    // --- CORRECCIÓN CLAVE: De LAZY a EAGER ---
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
@@ -34,14 +34,12 @@ public class Pedido {
     @Column(name = "direccion_envio", length = 1000)
     private String direccionEnvio;
 
-    // Relación: UN pedido tiene MUCHOS detalles (productos)
-    // CascadeType.ALL: Si guardo un pedido, guarda sus detalles. Si borro un pedido, borra sus detalles.
-    // orphanRemoval = true: Si quito un detalle de la lista, se borra de la BD.
+    // FetchType.EAGER ya estaba bien aquí para que siempre traiga los detalles
     @OneToMany(
             mappedBy = "pedido",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER // Cargar los detalles junto con el pedido
+            fetch = FetchType.EAGER
     )
     private List<DetallePedido> detalles = new ArrayList<>();
 
@@ -109,7 +107,6 @@ public class Pedido {
 
     public void setDetalles(List<DetallePedido> detalles) {
         this.detalles = detalles;
-        // Asignamos este pedido a cada detalle
         for (DetallePedido detalle : detalles) {
             detalle.setPedido(this);
         }

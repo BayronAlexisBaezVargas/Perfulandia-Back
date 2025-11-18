@@ -37,14 +37,14 @@ public class Producto {
     public Producto() {
     }
 
-    // Constructor para crear nuevos productos (actualizado para incluir activo)
+    // Constructor para crear nuevos productos (actualizado)
     public Producto(String nombre, Double precio, Integer stock, String descripcion, String imageLink) {
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
         this.descripcion = descripcion;
         this.imageLink = imageLink;
-        this.activo = true; // Al crear, nace activo
+        this.activo = true; // Inicializado como activo
     }
 
 
