@@ -30,18 +30,24 @@ public class Producto {
     @Column(name = "image_link")
     private String imageLink;
 
+    // --- NUEVO CAMPO PARA BORRADO LÓGICO ---
+    @Column(nullable = false)
+    private Boolean activo = true; // Por defecto es true (visible)
+
     public Producto() {
     }
 
-    // Constructor para crear nuevos productos (el ID es autogenerado)
+    // Constructor
     public Producto(String nombre, Double precio, Integer stock, String descripcion, String imageLink) {
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
         this.descripcion = descripcion;
         this.imageLink = imageLink;
+        this.activo = true; // Al crear, nace activo
     }
 
+    // --- Getters y Setters ---
 
     public Long getId() {
         return id;
@@ -89,5 +95,14 @@ public class Producto {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    // --- GETTERS Y SETTERS DEL NUEVO CAMPO ---
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

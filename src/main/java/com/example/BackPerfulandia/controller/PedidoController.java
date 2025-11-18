@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -125,5 +126,21 @@ public class PedidoController {
             // Si algo falla (ej. stock), se retorna un error 400
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+    @PutMapping("/{id}/estado")
+    public ResponseEntity<?> updateEstadoPedido(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String nuevoStatus = body.get("status"); // Esperamos un JSON: { "status": "Enviado" }
+
+        Optional<Pedido> pedidoOpt = pedidoRepository.findById(id);
+
+        if (pedidoOpt.isEmpty()) {
+            return new ResponseEntity<>("Pedido no encontrado", HttpStatus.NOT_FOUND);
+        }
+
+        Pedido pedido = pedidoOpt.get();
+        pedido.setStatus(nuevoStatus);
+        pedidoRepository.save(pedido);
+
+        return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
 }
