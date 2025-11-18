@@ -15,7 +15,7 @@ public class DetallePedido {
     // --- CORRECCIÓN 1: EAGER + JsonIgnore ---
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pedido_id", nullable = false)
-    @JsonIgnore // ¡CRUCIAL! Rompe el bucle DetallePedido -> Pedido
+    @JsonIgnore // Rompe el bucle DetallePedido -> Pedido
     private Pedido pedido;
 
     // --- CORRECCIÓN 2: EAGER ---
@@ -29,31 +29,22 @@ public class DetallePedido {
     @Column(nullable = false)
     private BigDecimal precioUnitario;
 
-    // --- Constructores ---
-    public DetallePedido() {
-    }
-
+    // --- Constructores y Getters/Setters (resto sigue igual) ---
+    public DetallePedido() { }
     public DetallePedido(Pedido pedido, Producto producto, Integer cantidad, BigDecimal precioUnitario) {
         this.pedido = pedido;
         this.producto = producto;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
-
-    // --- Getters y Setters ---
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
     public Pedido getPedido() { return pedido; }
     public void setPedido(Pedido pedido) { this.pedido = pedido; }
-
     public Producto getProducto() { return producto; }
     public void setProducto(Producto producto) { this.producto = producto; }
-
     public Integer getCantidad() { return cantidad; }
     public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
-
     public BigDecimal getPrecioUnitario() { return precioUnitario; }
     public void setPrecioUnitario(BigDecimal precioUnitario) { this.precioUnitario = precioUnitario; }
 }

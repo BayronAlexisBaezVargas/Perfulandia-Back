@@ -18,7 +18,7 @@ public class Pedido {
     private String numeroPedido;
 
     // --- CORRECCIÓN CLAVE: De LAZY a EAGER ---
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Carga el Usuario inmediatamente
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
@@ -34,7 +34,6 @@ public class Pedido {
     @Column(name = "direccion_envio", length = 1000)
     private String direccionEnvio;
 
-    // FetchType.EAGER ya estaba bien aquí para que siempre traiga los detalles
     @OneToMany(
             mappedBy = "pedido",
             cascade = CascadeType.ALL,
@@ -43,72 +42,25 @@ public class Pedido {
     )
     private List<DetallePedido> detalles = new ArrayList<>();
 
-    // --- Getters y Setters ---
+    // --- Getters y Setters (resto sigue igual) ---
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNumeroPedido() {
-        return numeroPedido;
-    }
-
-    public void setNumeroPedido(String numeroPedido) {
-        this.numeroPedido = numeroPedido;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDireccionEnvio() {
-        return direccionEnvio;
-    }
-
-    public void setDireccionEnvio(String direccionEnvio) {
-        this.direccionEnvio = direccionEnvio;
-    }
-
-    public List<DetallePedido> getDetalles() {
-        return detalles;
-    }
-
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getNumeroPedido() { return numeroPedido; }
+    public void setNumeroPedido(String numeroPedido) { this.numeroPedido = numeroPedido; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+    public BigDecimal getTotal() { return total; }
+    public void setTotal(BigDecimal total) { this.total = total; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public String getDireccionEnvio() { return direccionEnvio; }
+    public void setDireccionEnvio(String direccionEnvio) { this.direccionEnvio = direccionEnvio; }
+    public List<DetallePedido> getDetalles() { return detalles; }
     public void setDetalles(List<DetallePedido> detalles) {
         this.detalles = detalles;
-        for (DetallePedido detalle : detalles) {
-            detalle.setPedido(this);
-        }
+        for (DetallePedido detalle : detalles) { detalle.setPedido(this); }
     }
 }
