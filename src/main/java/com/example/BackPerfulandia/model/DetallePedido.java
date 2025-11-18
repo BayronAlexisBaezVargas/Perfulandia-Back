@@ -19,7 +19,7 @@ public class DetallePedido {
     private Pedido pedido;
 
     // Relación: Muchos detalles pueden apuntar a UN producto
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // <-- CORREGIDO
     @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 

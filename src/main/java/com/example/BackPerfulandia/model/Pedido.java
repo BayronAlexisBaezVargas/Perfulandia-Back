@@ -18,8 +18,7 @@ public class Pedido {
     @Column(name = "numero_pedido", unique = true, nullable = false)
     private String numeroPedido;
 
-    // Relación: Muchos pedidos pueden pertenecer a UN usuario
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // <-- CORREGIDO
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
