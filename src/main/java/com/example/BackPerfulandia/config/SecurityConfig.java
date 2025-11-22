@@ -22,14 +22,18 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        // Permite que CUALQUIERA acceda a estas rutas:
-                        .requestMatchers("/api/productos/**").permitAll() // Ver productos
-                        .requestMatchers("/api/auth/**").permitAll()    // Login y Registro
-                        .requestMatchers("/api/usuarios/**").permitAll() // Gestionar perfiles (¡Temporal!)
-                        .requestMatchers("/api/pedidos/**").permitAll() // Gestionar pedidos (¡Temporal!)
+                        // Rutas públicas de tu API
+                        .requestMatchers("/api/productos/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/usuarios/**").permitAll()
+                        .requestMatchers("/api/pedidos/**").permitAll()
 
-                        // CAMBIAR A .authenticated() cuando implementes JWT
-                        .anyRequest().permitAll()
+                        // --- NUEVAS RUTAS PÚBLICAS PARA SWAGGER ---
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+
+                        .anyRequest().permitAll() // Recuerda cambiar esto a .authenticated() en producción
                 );
 
         return http.build();
