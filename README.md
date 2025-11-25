@@ -71,7 +71,7 @@ config: Configuraciones globales como WebConfig (CORS), SecurityConfig (Segurida
 🔌 Endpoints Principales
 
 Una vez que la aplicación esté corriendo, puedes ver la documentación completa en:
-https://tu-dominio.onrender.com/swagger-ui/index.html
+[https://tu-dominio.onrender.com/swagger-ui/index.html](https://perfulandia-back.onrender.com/swagger-ui/index.html)
 
 Algunos endpoints clave:
 
